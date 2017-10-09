@@ -1,5 +1,6 @@
 package com.anlu.string;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,10 +21,14 @@ public class RegexDemo {
 //        replacing();
 
 
-        String[] ps = new String[2];
-        ps[0] = "abc+";
-        ps[1] = "abc?";
-        testRegular(ps,"ab");
+//        ArrayList<String> arrayList = new ArrayList<String>();
+//        arrayList.add("abc+");
+//        arrayList.add("^123");
+//
+//        testRegular(arrayList,"123");
+
+
+        testFlagReg();
     }
 
 
@@ -38,11 +43,7 @@ public class RegexDemo {
 
     }
 
-    public static void testRegular(String[] args,String targetStr){
-        if(args.length<2){
-
-        }
-
+    public static void testRegular(ArrayList<String> args,String targetStr){
         for (String arg: args) {
             Pattern p = Pattern.compile(arg);
             Matcher m = p.matcher(targetStr);
@@ -51,6 +52,24 @@ public class RegexDemo {
             }
         }
     }
+
+    /**
+     * pattern的标记
+     * 你还可以通过或| （|）操作符组合多个标记的功能
+     * Pattern.CASE_INSENSITIVE 这个模式表示匹配忽略大小写
+     * Pattern.MULTILINE 在多行模式下，表达式^和$分别匹配一行的开始和结束
+     */
+    public static void testFlagReg(){
+       Pattern p = Pattern.compile("^java",Pattern.CASE_INSENSITIVE );
+       Matcher m = p.matcher("java has regex \n JAVA has regex \n" +
+               "Java has a pretty good regular expression\n" +
+               "Regular expressions are in Java");
+       while (m.find()){
+           System.out.println(m.group());
+       }
+    }
+
+
 
 
 }
